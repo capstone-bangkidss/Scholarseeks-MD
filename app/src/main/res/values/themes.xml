@@ -3,7 +3,16 @@
     <style name="Base.Theme.TARecommendation" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
 
     <style name="Theme.TARecommendation" parent="Base.Theme.TARecommendation" />
+    
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="cornerRadius">30dp</item>
+    </style>
 </resources>
