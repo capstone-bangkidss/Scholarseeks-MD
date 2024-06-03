@@ -82,6 +82,7 @@
             android:layout_height="60dp"
             android:layout_weight="1"
             android:text="Login"
+            android:textColor="@color/white"
             android:backgroundTint="@color/accent"
             style="@style/Widget.MaterialComponents.Button"
             app:cornerRadius="30dp"/>

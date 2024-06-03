@@ -130,6 +130,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/register"
             android:textSize="20dp"
+            android:textColor="@color/white"
             app:cornerRadius="15dp" />
 
         <Button
@@ -137,7 +138,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/already_have_an_account_login"
-            android:textColor="@color/black"
+            android:textColor="@color/base_color"
             android:backgroundTint="@android:color/transparent" />
 
     </LinearLayout>
