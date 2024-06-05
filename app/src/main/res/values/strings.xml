@@ -11,4 +11,9 @@
     <string name="subject_area">Subject Area</string>
     <string name="username">Username</string>
     <string name="already_have_an_account_login">Already have an account? <u>Login</u></string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="profile">Profile</string>
 </resources>
