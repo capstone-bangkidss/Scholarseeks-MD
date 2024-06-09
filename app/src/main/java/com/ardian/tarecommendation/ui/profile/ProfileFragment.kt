@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.ardian.tarecommendation.R
 
 class ProfileFragment : Fragment() {
@@ -26,6 +27,8 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 }

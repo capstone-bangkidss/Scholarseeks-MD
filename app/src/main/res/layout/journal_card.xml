@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp">
 
     <androidx.cardview.widget.CardView
@@ -44,21 +44,33 @@
             tools:layout_editor_absoluteY="143dp">
 
             <TextView
+                android:id="@+id/tv_title"
                 style="@style/text.journalTitle"
                 tools:text="Learning Analytics: Game-based Learning for Programming Course in Higher Education" />
 
             <TextView
+                android:id="@+id/tv_author"
                 style="@style/text.light10sp"
                 tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
 
             <TextView
+                android:id="@+id/tv_year"
                 style="@style/text.regular10sp"
                 tools:text="19 June 2020" />
 
             <TextView
+                android:id="@+id/tv_keyword"
                 style="@style/categoryColor"
                 android:layout_marginTop="8dp"
                 tools:text="Learning" />
+
+            <LinearLayout
+                android:id="@+id/keyword_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </LinearLayout>
 
         </LinearLayout>
 
