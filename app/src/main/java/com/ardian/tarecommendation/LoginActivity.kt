@@ -13,9 +13,16 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         binding.btnRegister.setOnClickListener {
             val intentRegister = Intent(this, RegisterActivity::class.java)
             startActivity(intentRegister)
+        }
+
+        binding.btnLogin.setOnClickListener {
+            val intentHome = Intent(this, HomeActivity::class.java)
+            startActivity(intentHome)
         }
     }
 }
