@@ -3,37 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/black"
-        app:cardCornerRadius="24dp"
         app:strokeWidth="2dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/iconButton"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                app:icon="@drawable/icon_favorite_border"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,23 +27,46 @@
             tools:layout_editor_absoluteY="143dp">
 
             <TextView
+                android:id="@+id/tv_journalTitle"
                 style="@style/text.journalTitle"
                 tools:text="Learning Analytics: Game-based Learning for Programming Course in Higher Education" />
 
             <TextView
+                android:id="@+id/tv_author"
                 style="@style/text.light10sp"
                 tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
 
             <TextView
+                android:id="@+id/tv_journalPublish"
                 style="@style/text.regular10sp"
                 tools:text="19 June 2020" />
 
             <TextView
+                android:id="@+id/tv_category"
                 style="@style/categoryColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 tools:text="Learning" />
 
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btn_favorite"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                app:icon="@drawable/icon_favorite_border"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
