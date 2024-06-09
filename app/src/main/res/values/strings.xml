@@ -16,4 +16,5 @@
     <string name="title_explore">Explore</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_profile">Profile</string>
+    <string name="search_journal">Search journal</string>
 </resources>

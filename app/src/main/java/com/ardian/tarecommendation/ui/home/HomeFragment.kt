@@ -5,8 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.ardian.tarecommendation.R
 import com.ardian.tarecommendation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -22,6 +27,10 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 

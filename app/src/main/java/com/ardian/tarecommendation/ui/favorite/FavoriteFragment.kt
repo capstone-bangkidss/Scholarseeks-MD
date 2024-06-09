@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ardian.tarecommendation.databinding.FragmentFavoriteBinding
@@ -22,6 +23,10 @@ class FavoriteFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+
         val favoriteViewModel =
             ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
