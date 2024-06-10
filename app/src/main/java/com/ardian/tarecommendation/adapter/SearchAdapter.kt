@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ardian.tarecommendation.R
 import com.ardian.tarecommendation.databinding.JournalCardBinding
+import com.google.android.flexbox.FlexboxLayout
 import java.lang.StringBuilder
 
 class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_CALLBACK){
@@ -43,9 +44,8 @@ class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_
                     authorText.setLength(authorText.length - 2)
                 }
             }
-            val keywordContainer: LinearLayout = binding.keywordContainer
+            val keywordContainer: FlexboxLayout = binding.keywordContainer
             keywordContainer.removeAllViews()
-
             binding.tvTitle.text = journal.title
             binding.tvAuthor.text = authorText.toString()
             binding.tvYear.text = journal.year.toString()
@@ -53,14 +53,14 @@ class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_
                 keyword?.let {
                     val textView = TextView(binding.root.context).apply {
                         text = it
-                        layoutParams = LinearLayout.LayoutParams(
+                        layoutParams = FlexboxLayout.LayoutParams(
                             LinearLayout.LayoutParams.WRAP_CONTENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                         ).apply {
-                            setMargins(8, 8, 8, 8) // Equivalent to padding
+                            setMargins(0, 12, 8, 12) // Equivalent to padding
                         }
                         setBackgroundResource(R.drawable.rounded_textview) // Background resource
-                        setPadding(8, 4, 8, 4) // Padding
+                        setPadding(16, 8, 16, 8) // Padding
                         typeface = ResourcesCompat.getFont(context, R.font.poppins_medium) // Font
                         setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f) // Text size in SP
                         setTextColor(ContextCompat.getColor(context, R.color.white)) // Text color
