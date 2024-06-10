@@ -4,44 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.ardian.tarecommendation.R
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ardian.tarecommendation.data_dummy.JournalCollab
+import com.ardian.tarecommendation.data_dummy.JournalRfy
+import com.ardian.tarecommendation.data_dummy.getJournal
+import com.ardian.tarecommendation.data_dummy.getJournalCollab
 import com.ardian.tarecommendation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var viewModel: HomeViewModel
+
+    private val listJournalRecommendation = ArrayList<JournalRfy>()
+    private val listJournalCollaborative = ArrayList<JournalCollab>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
+        val layoutManagerRecommendation = LinearLayoutManager(requireActivity())
+        val itemDecorationRecommendation = DividerItemDecoration(requireActivity(), layoutManagerRecommendation.orientation)
+        binding.rvJournal.layoutManager = layoutManagerRecommendation
+        binding.rvJournal.setHasFixedSize(true)
+        binding.rvJournal.addItemDecoration(itemDecorationRecommendation)
+
+        listJournalRecommendation.addAll(getJournal())
+        showRecyclerListJournalRecommendation()
+
+        val layoutManagerCollaborative = LinearLayoutManager(requireActivity())
+        val itemDecorationCollaborative = DividerItemDecoration(requireActivity(), layoutManagerCollaborative.orientation)
+        binding.rvJournalCollaborative.layoutManager = layoutManagerCollaborative
+        binding.rvJournalCollaborative.setHasFixedSize(true)
+        binding.rvJournalCollaborative.addItemDecoration(itemDecorationCollaborative)
+
+        listJournalCollaborative.addAll(getJournalCollab())
+        showRecyclerListJournalCollaborative()
+    }
+
+    private fun showRecyclerListJournalRecommendation() {
+        val adapter = ListJournalAdapter(listJournalRecommendation)
+        binding.rvJournal.adapter = adapter
+    }
+
+    private fun showRecyclerListJournalCollaborative() {
+        val adapter = ListJournalCollabAdapter(listJournalCollaborative)
+        binding.rvJournalCollaborative.adapter = adapter
     }
 
     override fun onDestroyView() {
