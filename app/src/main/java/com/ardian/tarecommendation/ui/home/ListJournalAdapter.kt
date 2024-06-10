@@ -4,7 +4,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -22,7 +21,7 @@ class ListJournalAdapter(private val listJournal: ArrayList<JournalRfy>) : Recyc
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listJournal.size
+    override fun getItemCount(): Int = listJournal.size.coerceAtMost(5)
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val journal = listJournal[position]
@@ -33,7 +32,7 @@ class ListJournalAdapter(private val listJournal: ArrayList<JournalRfy>) : Recyc
 
             keywordContainer.removeAllViews()
             journal.keyword?.forEach { keyword ->
-                keyword?.let {
+                keyword.let {
                     val textView = TextView(root.context).apply {
                         text = it
                         layoutParams = FlexboxLayout.LayoutParams(
