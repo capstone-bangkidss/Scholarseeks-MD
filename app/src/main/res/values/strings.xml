@@ -16,7 +16,7 @@
     <string name="title_explore">Explore</string>
     <string name="title_favorite">Favorite</string>
     <string name="title_profile">Profile</string>
-    <string name="search_article">Search Article</string>
+    <string name="search_journal">Search Journal</string>
     <string name="recommendation_for_you">Recommendation For You</string>
 
 </resources>
