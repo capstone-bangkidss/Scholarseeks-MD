@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ardian.tarecommendation.data_dummy.JournalCollab
 import com.ardian.tarecommendation.data_dummy.JournalRfy
 import com.ardian.tarecommendation.data_dummy.getJournal
+import com.ardian.tarecommendation.data_dummy.getJournalCollab
 import com.ardian.tarecommendation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -19,21 +21,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: HomeViewModel
 
-    // dummy data (hapus nanti)
-    private val list = ArrayList<JournalRfy>()
+    private val listJournalRecommendation = ArrayList<JournalRfy>()
+    private val listJournalCollaborative = ArrayList<JournalCollab>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,19 +38,33 @@ class HomeFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        val layoutManager = LinearLayoutManager(requireActivity())
-        binding.rvJournal.layoutManager = layoutManager
+        val layoutManagerRecommendation = LinearLayoutManager(requireActivity())
+        val itemDecorationRecommendation = DividerItemDecoration(requireActivity(), layoutManagerRecommendation.orientation)
+        binding.rvJournal.layoutManager = layoutManagerRecommendation
         binding.rvJournal.setHasFixedSize(true)
-        val itemDecoration = DividerItemDecoration(requireActivity(), layoutManager.orientation)
-        binding.rvJournal.addItemDecoration(itemDecoration)
+        binding.rvJournal.addItemDecoration(itemDecorationRecommendation)
 
-        list.addAll(getJournal())
-        showRecyclerList()
+        listJournalRecommendation.addAll(getJournal())
+        showRecyclerListJournalRecommendation()
+
+        val layoutManagerCollaborative = LinearLayoutManager(requireActivity())
+        val itemDecorationCollaborative = DividerItemDecoration(requireActivity(), layoutManagerCollaborative.orientation)
+        binding.rvJournalCollaborative.layoutManager = layoutManagerCollaborative
+        binding.rvJournalCollaborative.setHasFixedSize(true)
+        binding.rvJournalCollaborative.addItemDecoration(itemDecorationCollaborative)
+
+        listJournalCollaborative.addAll(getJournalCollab())
+        showRecyclerListJournalCollaborative()
     }
 
-    private fun showRecyclerList() {
-        val adapter = ListJournalAdapter(list)
+    private fun showRecyclerListJournalRecommendation() {
+        val adapter = ListJournalAdapter(listJournalRecommendation)
         binding.rvJournal.adapter = adapter
+    }
+
+    private fun showRecyclerListJournalCollaborative() {
+        val adapter = ListJournalCollabAdapter(listJournalCollaborative)
+        binding.rvJournalCollaborative.adapter = adapter
     }
 
     override fun onDestroyView() {
