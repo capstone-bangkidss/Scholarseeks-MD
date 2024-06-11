@@ -18,10 +18,10 @@ import com.ardian.tarecommendation.databinding.JournalCardBinding
 import com.google.android.flexbox.FlexboxLayout
 import java.lang.StringBuilder
 
-class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_CALLBACK){
+class SearchAdapter(private val itemClickListener: (JournalItem) -> Unit) : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_CALLBACK){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.MyViewHolder {
         val binding = JournalCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        return MyViewHolder(binding, itemClickListener)
     }
 
     override fun onBindViewHolder(holder: SearchAdapter.MyViewHolder, position: Int) {
@@ -29,7 +29,7 @@ class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_
         holder.bind(journal)
     }
 
-    class MyViewHolder(val binding: JournalCardBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(val binding: JournalCardBinding, private val itemClickListener: (JournalItem) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(journal: JournalItem) {
             val authorList: List<String?>? = journal.author
             val authorText = StringBuilder()
@@ -68,6 +68,10 @@ class SearchAdapter : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_
                     }
                     keywordContainer.addView(textView)
                 }
+            }
+
+            binding.root.setOnClickListener {
+                itemClickListener(journal)
             }
         }
     }

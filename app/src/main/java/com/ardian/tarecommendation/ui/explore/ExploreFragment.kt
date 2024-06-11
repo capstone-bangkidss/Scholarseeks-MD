@@ -1,15 +1,19 @@
 package com.ardian.tarecommendation.ui.explore
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ardian.tarecommendation.AuthDialogUtils
+import com.ardian.tarecommendation.R
 import com.ardian.tarecommendation.adapter.SearchAdapter
 import com.ardian.tarecommendation.databinding.FragmentExploreBinding
 
@@ -27,6 +31,8 @@ class ExploreFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        val login = false
 
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
@@ -51,7 +57,15 @@ class ExploreFragment : Fragment() {
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvSearchResult.layoutManager = layoutManager
 
-        adapter = SearchAdapter()
+        adapter = SearchAdapter(
+            itemClickListener = { journalItem ->
+                val dialogTitle = "Sign In is required"
+                val skip = true
+                if (!login) {
+                    AuthDialogUtils.showDialog(binding.root.context, title = dialogTitle, skip = skip)
+                }
+            }
+        )
 
         exploreViewModel.sampleData.observe(viewLifecycleOwner) { sampleData ->
             adapter.submitList(sampleData)
@@ -65,6 +79,16 @@ class ExploreFragment : Fragment() {
 //        }
         return root
     }
+
+//    private fun showRegisterDialog() {
+//        val dialogView = LayoutInflater.from(binding.root.context).inflate(R.layout.dialog_auth, null)
+//        val dialog = AlertDialog.Builder(binding.root.context)
+//            .setView(dialogView)
+//            .setPositiveButton(null, null)
+//            .create()
+//        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+//        dialog.show()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
