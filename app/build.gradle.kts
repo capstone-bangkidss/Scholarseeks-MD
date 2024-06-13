@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ardian.tarecommendation"
+    namespace = "com.bangkidss.scholarseeks"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.ardian.tarecommendation"
+        applicationId = "com.bangkidss.scholarseeks"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
