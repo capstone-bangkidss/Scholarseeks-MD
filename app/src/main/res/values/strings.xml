@@ -19,5 +19,7 @@
     <string name="search_journal">Search Journal</string>
     <string name="recommendation_for_you">Recommendation For You</string>
     <string name="you_may_also_like">You May Also Like</string>
+    <string name="journal_abstract">Abstract</string>
+    <string name="visit_site">Visit Site</string>
 
 </resources>

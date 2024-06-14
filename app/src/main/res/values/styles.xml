@@ -16,23 +16,16 @@
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="text.light10sp">
+    <style name="text.regular12sp">
         <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="text.regular10sp">
-        <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textAlignment">textStart</item>
-    </style>
-
-    <style name="text.regular16sp">
-        <item name="android:fontFamily">@font/poppins_regular</item>
-        <item name="android:textSize">16sp</item>
+    <style name="text.Bold20sp">
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAlignment">textStart</item>
     </style>
