@@ -14,7 +14,7 @@
 
         <TextView
             android:id="@+id/tv_rfy"
-            style="@style/text.regular16sp"
+            style="@style/text.Bold20sp"
             android:text="@string/recommendation_for_you"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -25,6 +25,7 @@
             android:id="@+id/rv_journal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +33,8 @@
 
         <TextView
             android:id="@+id/tv_collaborative"
-            style="@style/text.regular16sp"
-            android:layout_marginVertical="20dp"
+            style="@style/text.Bold20sp"
+            android:layout_marginTop="20dp"
             android:text="@string/you_may_also_like"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -44,6 +45,7 @@
             android:id="@+id/rv_journal_collaborative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

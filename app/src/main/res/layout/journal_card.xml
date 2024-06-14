@@ -49,12 +49,12 @@
 
             <TextView
                 android:id="@+id/tv_author"
-                style="@style/text.light10sp"
+                style="@style/text.regular12sp"
                 tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
 
             <TextView
                 android:id="@+id/tv_year"
-                style="@style/text.regular10sp"
+                style="@style/text.regular12sp"
                 tools:text="19 June 2020" />
 
             <com.google.android.flexbox.FlexboxLayout
