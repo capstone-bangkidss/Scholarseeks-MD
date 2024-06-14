@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    tools:context=".ui.detailJournal.DetailJournalActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btn_visit_site"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/visit_site"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/floatingActionButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:numStars="5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/keywordContainer" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/text.journalTitle"
+            android:layout_marginTop="16dp"
+            android:text="@string/journal_abstract"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_author" />
+
+        <TextView
+            android:id="@+id/tv_abstract"
+            style="@style/text.regular12sp"
+            android:justificationMode="inter_word"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            tools:text="The traditional classroom teaching is monotonous based teaching techniques and it lacks interaction and students lose the curiosity to understand the purpose of studying the course. The learners anticipate new teaching techniques, digital assignment, and challenging assessment patterns. In higher education, various new teaching-learning process is introduced to engage the learners with motivations and kindle the practice of self-learning thereby paying the way for acquisition of better competency skills and knowledge. With the various innovations in ICT for higher-education, game based learning is one of the innovative teaching-learning strategies which gained interest in various universities. The paradigm shift of ICT is tangled with various teaching methodologies in-order to match the 21st- century learners. The game based learning for programming course stimulates the curiosity to learn and understand the programming concepts in a better way. It also suits all the types of learners in the classroom especially the slow learners. The purpose of choosing gaming as a teaching aid, the learners are so much interested and addicted to any form of gaming. Using this as opportunity and interest in higher education, the programming courses will surely yield better performances and motivate the learners for lifelong learning skills. This ongoing project is focused on developing game-based learning for programming courses for first-year undergraduate students of our university. All the first-year students of various departments undergo a Python programming language course during the first semester...." />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text.Bold20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Learning Analytics: Game-based Learning for Programming Course in Higher Education" />
+
+        <TextView
+            android:id="@+id/tv_doi"
+            style="@style/text.regular12sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="https://doi.org/10.1016/j.procs.2020.05.143" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            style="@style/text.regular12sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_doi"
+            tools:text="19 June 2020" />
+
+        <TextView
+            android:id="@+id/tv_author"
+            style="@style/text.regular12sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_year"
+            tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/keywordContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="2"
+            app:flexWrap="wrap"
+            app:justifyContent="flex_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_abstract" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            style="?attr/floatingActionButtonSmallStyle"
+            android:layout_width="212dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:src="@drawable/icon_favorite_border"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_visit_site"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_visit_site"
+            app:layout_constraintTop_toTopOf="@+id/btn_visit_site"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
