@@ -55,7 +55,7 @@ class ExploreFragment : Fragment() {
 
         adapter = SearchAdapter(
             itemClickListener = { journalItem ->
-                val dialogTitle = "Sign In is required"
+                val dialogTitle = "Register for access"
                 val skip = true
                 if (!login) {
                     AuthDialogUtils.showDialog(binding.root.context, title = dialogTitle, skip = skip)

@@ -16,14 +16,9 @@ class GetStartedActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.btnLogin.setOnClickListener {
-            val intentLogin = Intent(this, LoginActivity::class.java)
-            startActivity(intentLogin)
-        }
-
-        binding.btnRegister.setOnClickListener {
-            val intentRegister = Intent(this, RegisterActivity::class.java)
-            startActivity(intentRegister)
+        binding.getStarted.setOnClickListener {
+            val intentSubjectArea = Intent(this, SubjectActivity::class.java)
+            startActivity(intentSubjectArea)
         }
 
 

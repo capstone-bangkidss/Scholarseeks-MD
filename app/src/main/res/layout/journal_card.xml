@@ -15,24 +15,25 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:cardCornerRadius="24dp"
+        android:backgroundTint="@android:color/transparent"
         app:strokeWidth="1dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent">-->
 
-            <Button
-                android:id="@+id/iconButton"
-                style="?attr/materialIconButtonFilledTonalStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                app:icon="@drawable/icon_favorite_border"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="SpeakableTextPresentCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <Button-->
+<!--                android:id="@+id/iconButton"-->
+<!--                style="?attr/materialIconButtonFilledTonalStyle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                app:icon="@drawable/icon_favorite_border"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                tools:ignore="SpeakableTextPresentCheck" />-->
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,12 +58,28 @@
                 style="@style/text.regular12sp"
                 tools:text="19 June 2020" />
 
-            <com.google.android.flexbox.FlexboxLayout
-                android:id="@+id/keywordContainer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:flexWrap="wrap"
-                app:justifyContent="flex_start"/>
+                android:orientation="horizontal">
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/keywordContainer"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:flexWrap="wrap"
+                    app:justifyContent="flex_start"/>
+
+                <Button
+                    android:id="@+id/iconButton"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/icon_favorite_border"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
