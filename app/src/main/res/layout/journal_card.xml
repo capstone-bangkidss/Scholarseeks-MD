@@ -76,6 +76,7 @@
                     style="?attr/materialIconButtonFilledTonalStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
                     app:icon="@drawable/icon_favorite_border"
                     tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>

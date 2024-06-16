@@ -1,5 +1,6 @@
 package com.bangkidss.scholarseeks.adapter
 
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -8,15 +9,17 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkidss.scholarseeks.R
+import com.bangkidss.scholarseeks.api.ArticlesItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.google.android.flexbox.FlexboxLayout
 import java.lang.StringBuilder
 
-class SearchAdapter(private val itemClickListener: (JournalItem) -> Unit) : ListAdapter<JournalItem, SearchAdapter.MyViewHolder>(DIFF_CALLBACK){
+class SearchAdapter(private val itemClickListener: (ArticlesItem) -> Unit) : PagingDataAdapter<ArticlesItem, SearchAdapter.MyViewHolder>(DIFF_CALLBACK){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchAdapter.MyViewHolder {
         val binding = JournalCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyViewHolder(binding, itemClickListener)
@@ -24,30 +27,23 @@ class SearchAdapter(private val itemClickListener: (JournalItem) -> Unit) : List
 
     override fun onBindViewHolder(holder: SearchAdapter.MyViewHolder, position: Int) {
         val journal = getItem(position)
-        holder.bind(journal)
+        if (journal != null){
+            holder.bind(journal)
+        }
     }
 
-    class MyViewHolder(val binding: JournalCardBinding, private val itemClickListener: (JournalItem) -> Unit) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(journal: JournalItem) {
-            val authorList: List<String?>? = journal.author
-            val authorText = StringBuilder()
-            if (!authorList.isNullOrEmpty()) {
-                authorList.forEach { author ->
-                    author?.let {
-                        authorText.append(it).append(", ")
-                    }
-                }
-                // hapus koma
-                if (authorText.isNotEmpty()) {
-                    authorText.setLength(authorText.length - 2)
-                }
-            }
+    class MyViewHolder(val binding: JournalCardBinding, private val itemClickListener: (ArticlesItem) -> Unit) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(journal: ArticlesItem) {
+            Log.d("viewList", "list created")
             val keywordContainer: FlexboxLayout = binding.keywordContainer
             keywordContainer.removeAllViews()
-            binding.tvTitle.text = journal.title
-            binding.tvAuthor.text = authorText.toString()
+            binding.tvTitle.text = journal.title.toString()
+            binding.tvAuthor.text = journal.authors.toString()
             binding.tvYear.text = journal.year.toString()
-            journal.keyword?.forEach { keyword ->
+            val keywordString = journal.indexKeywords
+
+            val keywords = keywordString?.split(";")?.map { it.trim() }
+            keywords?.take(20)?.forEach { keyword ->
                 keyword?.let {
                     val textView = TextView(binding.root.context).apply {
                         text = it
@@ -75,14 +71,13 @@ class SearchAdapter(private val itemClickListener: (JournalItem) -> Unit) : List
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<JournalItem>() {
-            override fun areItemsTheSame(oldItem: JournalItem, newItem: JournalItem): Boolean {
-                return oldItem == newItem
-            }
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ArticlesItem>() {
+            override fun areItemsTheSame(oldItem: ArticlesItem, newItem: ArticlesItem): Boolean =
+                oldItem.articleId == newItem.articleId
 
-            override fun areContentsTheSame(oldItem: JournalItem, newItem: JournalItem): Boolean {
-                return oldItem == newItem
-            }
+
+            override fun areContentsTheSame(oldItem: ArticlesItem, newItem: ArticlesItem): Boolean =
+                oldItem == newItem
         }
     }
 }
