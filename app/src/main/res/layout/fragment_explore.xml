@@ -27,10 +27,195 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <com.google.android.material.checkbox.MaterialCheckBox
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="filter" />
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Sort by ChipGroup -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sort by"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSortBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortByTitle"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Title" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortByYear"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Year" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSortByCitedBy"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cited by" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <!-- Categories ChipGroup -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categories"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryCompSci"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Computer Science" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryLaw"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Law" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryPharmacy"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pharmacy" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryAgricultural"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Agricultural" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryBiology"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biology" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryArtsAndHumanity"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Arts and Humanity" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryBioChemistry"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biochemistry" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryGenetics"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Genetics" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryMolecularBiology"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Molecular Biology" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryBusiness"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Business" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryManagement"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Management" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryAccounting"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accounting" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryChemicalEngineering"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chemical Engineering" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryChemistry"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chemistry" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryEnergy"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Energy" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryEngineering"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Engineering" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryEnviromentalScience"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Environmental Science" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCategoryCulture"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Culture" />
+
+                <!-- Add more categories as needed -->
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
     </com.google.android.material.search.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
