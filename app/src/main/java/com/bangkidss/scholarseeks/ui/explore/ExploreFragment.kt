@@ -23,7 +23,7 @@ import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.adapter.SearchAdapter
 import com.bangkidss.scholarseeks.api.ApiConfig
-import com.bangkidss.scholarseeks.data_dummy.JournalRfy
+import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.FragmentExploreBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.bangkidss.scholarseeks.ui.detailJournal.JournalModel
@@ -91,19 +91,19 @@ class ExploreFragment : Fragment() {
                 val login = true
                 if (login) {
 
-                    val journalModel = JournalModel(
-                        title = journalItem.title,
-                        authors = journalItem.authors,
-                        DOI = journalItem.DOI,
-                        year = journalItem.year,
-                        abstract = journalItem.jsonMemberAbstract,
-                        index_keywords = journalItem.indexKeywords
+                    val dataJournal = RecomArticleResponseItem(
+                        title = (journalItem.title) ?: "",
+                        dOI = journalItem.dOI ?: "",
+                        authors = journalItem.authors ?: "",
+                        year = journalItem.year ?: 0,
+                        abstract = journalItem.jsonMemberAbstract ?: "",
+                        indexKeywords = journalItem.indexKeywords ?: ""
                     )
 
                     val intentDetail = Intent(requireContext(), DetailJournalActivity::class.java)
                     intentDetail.putExtra(
                         DetailJournalActivity.EXTRA_DETAIL,
-                        journalModel
+                        dataJournal
                     )
                     startActivity(intentDetail)
                 } else {

@@ -49,9 +49,6 @@ class DetailJournalActivity : AppCompatActivity() {
             binding.tvAuthor.text = dataJournal.authors
             binding.tvYear.text = dataJournal.year.toString()
             binding.tvAbstract.text = dataJournal.abstract
-
-            val keywordString = dataJournal.index_keywords
-            val keywords = keywordString?.split(";")?.map { it.trim() }
             
             binding.keywordContainer.removeAllViews()
             dataJournal.indexKeywords.split(";").forEach { keyword ->
