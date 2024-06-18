@@ -37,7 +37,7 @@ class DetailJournalActivity : AppCompatActivity() {
         supportActionBar?.title = "Journal"
 
         val dataJournal = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(EXTRA_DETAIL, JournalRfy::class.java)
+            intent.getParcelableExtra(EXTRA_DETAIL, JournalModel::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(EXTRA_DETAIL)
@@ -45,13 +45,15 @@ class DetailJournalActivity : AppCompatActivity() {
 
         if (dataJournal != null) {
             binding.tvTitle.text = dataJournal.title
-            binding.tvDoi.text = dataJournal.doi
-            binding.tvAuthor.text = dataJournal.author
-            binding.tvYear.text = dataJournal.published
+            binding.tvDoi.text = dataJournal.DOI
+            binding.tvAuthor.text = dataJournal.authors
+            binding.tvYear.text = dataJournal.year.toString()
             binding.tvAbstract.text = dataJournal.abstract
 
+            val keywordString = dataJournal.index_keywords
+            val keywords = keywordString?.split(";")?.map { it.trim() }
             binding.keywordContainer.removeAllViews()
-            dataJournal.keyword?.forEach { keyword ->
+            keywords?.forEach { keyword ->
                 keyword.let {
                     val textView = TextView(binding.root.context).apply {
                         text = it
