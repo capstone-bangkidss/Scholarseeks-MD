@@ -10,12 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkidss.scholarseeks.R
-import com.bangkidss.scholarseeks.data_dummy.JournalRfy
+import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
 
-class ListJournalAdapter(private val listJournal: ArrayList<JournalRfy>) :
+class ListJournalAdapter(private val listJournal: List<RecomArticleResponseItem>) :
     RecyclerView.Adapter<ListJournalAdapter.ListViewHolder>() {
     inner class ListViewHolder(val binding: JournalCardBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -25,17 +25,17 @@ class ListJournalAdapter(private val listJournal: ArrayList<JournalRfy>) :
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listJournal.size.coerceAtMost(5)
+    override fun getItemCount(): Int = listJournal.size.coerceAtMost(10)
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val journal = listJournal[position]
         holder.binding.apply {
             tvTitle.text = journal.title
-            tvAuthor.text = journal.author
-            tvYear.text = journal.published
+            tvAuthor.text = journal.authors
+            tvYear.text = journal.year.toString()
 
             keywordContainer.removeAllViews()
-            journal.keyword?.forEach { keyword ->
+            journal.indexKeywords.split(";").take(4).forEach { keyword ->
                 keyword.let {
                     val textView = TextView(root.context).apply {
                         text = it
@@ -60,6 +60,7 @@ class ListJournalAdapter(private val listJournal: ArrayList<JournalRfy>) :
         // melakukan perpindahan ke detail journal menggunakan intent
         holder.itemView.setOnClickListener {
             val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
+            @Suppress("DEPRECATION")
             intentDetail.putExtra(
                 DetailJournalActivity.EXTRA_DETAIL,
                 listJournal[holder.adapterPosition]

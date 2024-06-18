@@ -13,7 +13,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkidss.scholarseeks.R
-import com.bangkidss.scholarseeks.data_dummy.JournalRfy
+import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.ActivityDetailJournalBinding
 import com.bangkidss.scholarseeks.ui.webview.JournalSiteActivity
 import com.google.android.flexbox.FlexboxLayout
@@ -37,7 +37,7 @@ class DetailJournalActivity : AppCompatActivity() {
         supportActionBar?.title = "Journal"
 
         val dataJournal = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(EXTRA_DETAIL, JournalModel::class.java)
+            intent.getParcelableExtra(EXTRA_DETAIL, RecomArticleResponseItem::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(EXTRA_DETAIL)
@@ -45,15 +45,16 @@ class DetailJournalActivity : AppCompatActivity() {
 
         if (dataJournal != null) {
             binding.tvTitle.text = dataJournal.title
-            binding.tvDoi.text = dataJournal.DOI
+            binding.tvDoi.text = "https://doi.org/${dataJournal.dOI}"
             binding.tvAuthor.text = dataJournal.authors
             binding.tvYear.text = dataJournal.year.toString()
             binding.tvAbstract.text = dataJournal.abstract
 
             val keywordString = dataJournal.index_keywords
             val keywords = keywordString?.split(";")?.map { it.trim() }
+            
             binding.keywordContainer.removeAllViews()
-            keywords?.forEach { keyword ->
+            dataJournal.indexKeywords.split(";").forEach { keyword ->
                 keyword.let {
                     val textView = TextView(binding.root.context).apply {
                         text = it
