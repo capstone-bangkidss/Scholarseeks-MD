@@ -1,5 +1,5 @@
 package com.bangkidss.scholarseeks.api
 
-data class RecomArticleRequest(
+data class UserId(
     val user_id: String
 )

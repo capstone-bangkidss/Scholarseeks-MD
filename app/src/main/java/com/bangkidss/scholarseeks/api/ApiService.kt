@@ -26,6 +26,12 @@ interface ApiService {
     @POST("/content-model/get-articles")
     fun getRecommendationArticle(
         @Header("Authorization") jwt_token: String,
-        @Body recommendationArticleRequest: RecomArticleRequest
+        @Body userId: UserId
+    ) : Call<List<RecomArticleResponseItem>>
+
+    @POST("/collaborative-model/get-articles")
+    fun getCollaborativeArticle(
+        @Header("Authorization") jwt_token: String,
+        @Body userId: UserId
     ) : Call<List<RecomArticleResponseItem>>
 }

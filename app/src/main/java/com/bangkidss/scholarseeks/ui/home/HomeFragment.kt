@@ -42,11 +42,13 @@ class HomeFragment : Fragment() {
         userModel = mUserPreference.getUser()
 
         // Ensure userModel is properly initialized before accessing its properties
-        val user_token = userModel.jwt_token.toString()
-        val jwtToken = "Bearer $user_token"
+        val userToken = userModel.jwt_token.toString()
+        val jwtToken = "Bearer $userToken"
         val userId = userModel.user_id.toString()
 
         viewModel.getRecomendationArticle(jwtToken, userId)
+
+        viewModel.getCollaborativeArticle(jwtToken, userId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,10 +67,28 @@ class HomeFragment : Fragment() {
                 binding.rvJournal.adapter = adapter
             }
         })
+
+        binding.rvJournalCollaborative.layoutManager = LinearLayoutManager(requireActivity())
+
+        viewModel.collaborativeArticleIsLoading.observe(viewLifecycleOwner) {
+            showLoadingCollaborativeArticle(it)
+        }
+
+        viewModel.collaborativeArticle.observe(viewLifecycleOwner, Observer { articles ->
+            articles?.let {
+                Log.d("HomeFragment", "Articles updated: $articles")
+                val adapter = ListJournalCollabAdapter(articles)
+                binding.rvJournalCollaborative.adapter = adapter
+            }
+        })
     }
 
     private fun showLoadingRecomArticle(isLoading: Boolean) {
         binding.pbRecomArticle.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showLoadingCollaborativeArticle(isLoading: Boolean) {
+        binding.pbArticleCollab.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
