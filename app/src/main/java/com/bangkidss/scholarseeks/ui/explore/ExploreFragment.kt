@@ -1,5 +1,6 @@
 package com.bangkidss.scholarseeks.ui.explore
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,7 +23,10 @@ import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.adapter.SearchAdapter
 import com.bangkidss.scholarseeks.api.ApiConfig
+import com.bangkidss.scholarseeks.data_dummy.JournalRfy
 import com.bangkidss.scholarseeks.databinding.FragmentExploreBinding
+import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
+import com.bangkidss.scholarseeks.ui.detailJournal.JournalModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -84,10 +88,27 @@ class ExploreFragment : Fragment() {
 
         adapter = SearchAdapter(
             itemClickListener = { journalItem ->
-                val dialogTitle = "Register for access"
-                val skip = true
-                val login = false
-                if (!login) {
+                val login = true
+                if (login) {
+
+                    val journalModel = JournalModel(
+                        title = journalItem.title,
+                        authors = journalItem.authors,
+                        DOI = journalItem.DOI,
+                        year = journalItem.year,
+                        abstract = journalItem.jsonMemberAbstract,
+                        index_keywords = journalItem.indexKeywords
+                    )
+
+                    val intentDetail = Intent(requireContext(), DetailJournalActivity::class.java)
+                    intentDetail.putExtra(
+                        DetailJournalActivity.EXTRA_DETAIL,
+                        journalModel
+                    )
+                    startActivity(intentDetail)
+                } else {
+                    val dialogTitle = "Register for access"
+                    val skip = true
                     AuthDialogUtils.showDialog(binding.root.context, title = dialogTitle, skip = skip)
                 }
             }

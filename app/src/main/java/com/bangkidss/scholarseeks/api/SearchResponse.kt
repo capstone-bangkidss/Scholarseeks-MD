@@ -1,6 +1,8 @@
 package com.bangkidss.scholarseeks.api
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class SearchResponse(
 
@@ -17,6 +19,7 @@ data class SearchResponse(
 	val totalResults: Int? = null
 )
 
+@Parcelize
 data class ArticlesItem(
 
 	@field:SerializedName("article_id")
@@ -54,4 +57,4 @@ data class ArticlesItem(
 
 	@field:SerializedName("source_title")
 	val sourceTitle: String? = null
-)
+) : Parcelable

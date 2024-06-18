@@ -14,6 +14,7 @@ import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.ActivityJournalSiteBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
+import com.bangkidss.scholarseeks.ui.detailJournal.JournalModel
 
 class JournalSiteActivity : AppCompatActivity() {
 
