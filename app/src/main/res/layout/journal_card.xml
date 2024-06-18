@@ -51,6 +51,7 @@
             <TextView
                 android:id="@+id/tv_author"
                 style="@style/text.regular12sp"
+                android:maxLines="3"
                 tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
 
             <TextView

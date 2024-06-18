@@ -39,19 +39,15 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val layoutManagerRecommendation = LinearLayoutManager(requireActivity())
-        val itemDecorationRecommendation = DividerItemDecoration(requireActivity(), layoutManagerRecommendation.orientation)
         binding.rvJournal.layoutManager = layoutManagerRecommendation
         binding.rvJournal.setHasFixedSize(true)
-        binding.rvJournal.addItemDecoration(itemDecorationRecommendation)
 
         listJournalRecommendation.addAll(getJournal())
         showRecyclerListJournalRecommendation()
 
         val layoutManagerCollaborative = LinearLayoutManager(requireActivity())
-        val itemDecorationCollaborative = DividerItemDecoration(requireActivity(), layoutManagerCollaborative.orientation)
         binding.rvJournalCollaborative.layoutManager = layoutManagerCollaborative
         binding.rvJournalCollaborative.setHasFixedSize(true)
-        binding.rvJournalCollaborative.addItemDecoration(itemDecorationCollaborative)
 
         listJournalCollaborative.addAll(getJournalCollab())
         showRecyclerListJournalCollaborative()
