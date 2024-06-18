@@ -89,7 +89,7 @@ class SubjectActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-            AuthDialogUtils.showDialog(this, "Login to an existing account", false)
+//            AuthDialogUtils.showDialog(this, "Login to an existing account", false)
         }
     }
 
@@ -109,16 +109,16 @@ class SubjectActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == AuthDialogUtils.RC_SIGN_IN) {
-            AuthDialogUtils.handleSignInResult(data, { idToken ->
-                Log.d("Subject", "idToken: $idToken")
-            }, { exception ->
-                Log.e("Subject", "Failed")
-            })
-        }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == AuthDialogUtils.RC_SIGN_IN) {
+//            AuthDialogUtils.handleSignInResult(data, { idToken ->
+//                Log.d("Subject", "idToken: $idToken")
+//            }, { exception ->
+//                Log.e("Subject", "Failed")
+//            })
+//        }
 
 //        if (requestCode == AuthDialogUtils.RC_SIGN_IN) {
 //            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
@@ -129,5 +129,5 @@ class SubjectActivity : AppCompatActivity() {
 //
 //            }
 //        }
-    }
+//    }
 }

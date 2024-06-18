@@ -13,6 +13,9 @@ data class RecomArticleResponse(
 @Parcelize
 data class RecomArticleResponseItem(
 
+	@field:SerializedName("article_id")
+	val articleId: Int,
+
 	@field:SerializedName("index_keywords")
 	val indexKeywords: String,
 

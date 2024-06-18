@@ -7,5 +7,5 @@ import kotlinx.parcelize.Parcelize
 data class UserModel(
     var jwt_token: String? = null,
     var user_id: String? = null,
-    var google_token: String? = null
+    var id_token: String? = null,
 ) : Parcelable
