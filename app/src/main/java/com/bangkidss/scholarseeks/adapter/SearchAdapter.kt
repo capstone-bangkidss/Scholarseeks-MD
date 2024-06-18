@@ -43,7 +43,7 @@ class SearchAdapter(private val itemClickListener: (ArticlesItem) -> Unit) : Pag
             val keywordString = journal.indexKeywords
 
             val keywords = keywordString?.split(";")?.map { it.trim() }
-            keywords?.take(20)?.forEach { keyword ->
+            keywords?.take(4)?.forEach { keyword ->
                 keyword?.let {
                     val textView = TextView(binding.root.context).apply {
                         text = it

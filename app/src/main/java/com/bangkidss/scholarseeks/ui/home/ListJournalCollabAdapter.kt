@@ -31,7 +31,7 @@ class ListJournalCollabAdapter(private val listJournal: ArrayList<JournalCollab>
             tvYear.text = journal.published
 
             keywordContainer.removeAllViews()
-            journal.keyword?.forEach { keyword ->
+            journal.keyword?.take(4)?.forEach { keyword ->
                 keyword.let {
                     val textView = TextView(root.context).apply {
                         text = it
@@ -46,7 +46,7 @@ class ListJournalCollabAdapter(private val listJournal: ArrayList<JournalCollab>
                         setPadding(16, 8, 16, 8) // Padding
                         typeface = ResourcesCompat.getFont(context, R.font.poppins_medium) // Font
                         setTextColor(ContextCompat.getColor(context, R.color.white)) // Text color
-                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f) // Text size in SP
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f) // Text size in SP
                         textAlignment = View.TEXT_ALIGNMENT_CENTER // Text alignment
                     }
                     keywordContainer.addView(textView)
