@@ -22,4 +22,10 @@ interface ApiService {
         @Query("per_page") per_page: Int? = null,
         @Header("Authorization") jwt_token: String
     ) : SearchResponse
+
+    @POST("/content-model/get-articles")
+    fun getRecommendationArticle(
+        @Header("Authorization") jwt_token: String,
+        @Body recommendationArticleRequest: RecomArticleRequest
+    ) : Call<RecomArticleResponse>
 }
