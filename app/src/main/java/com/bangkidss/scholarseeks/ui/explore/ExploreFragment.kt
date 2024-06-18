@@ -90,6 +90,7 @@ class ExploreFragment : Fragment(), AuthResultCallback {
                 if (!userModel.id_token.isNullOrEmpty()) {
 
                     val dataJournal = RecomArticleResponseItem(
+                        articleId = journalItem.articleId ?: 0,
                         title = (journalItem.title) ?: "",
                         dOI = journalItem.dOI ?: "",
                         authors = journalItem.authors ?: "",

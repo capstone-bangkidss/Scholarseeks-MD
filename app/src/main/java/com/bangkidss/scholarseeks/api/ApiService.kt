@@ -29,6 +29,12 @@ interface ApiService {
         @Body authRequest: AuthRequest
     ) : Call<AuthResponse>
 
+    @POST("articles/rating")
+    fun rateArticle(
+        @Header("Authorization") jwt_token: String,
+        @Body ratingRequest: RatingRequest
+    ) : Call<RatingResponse>
+
 
     @POST("/content-model/get-articles")
     fun getRecommendationArticle(
