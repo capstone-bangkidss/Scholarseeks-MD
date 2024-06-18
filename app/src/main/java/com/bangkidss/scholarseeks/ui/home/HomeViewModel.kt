@@ -24,21 +24,21 @@ class HomeViewModel : ViewModel() {
         _recomArticleisLoading.value = true
         val request = RecomArticleRequest(userId)
         val client = ApiConfig.getApiService().getRecommendationArticle(jwtToken, request)
-        client.enqueue(object : Callback<RecomArticleResponse> {
+        client.enqueue(object : Callback<List<RecomArticleResponseItem>> {
             override fun onResponse(
-                call: Call<RecomArticleResponse>,
-                response: Response<RecomArticleResponse>
+                call: Call<List<RecomArticleResponseItem>>,
+                response: Response<List<RecomArticleResponseItem>>
             ) {
                 _recomArticleisLoading.value = false
                 if (response.isSuccessful) {
-                    _recommendedArticles.value = response.body()?.response
-                    Log.d(TAG, "Articles fetched: ${response.body()?.response}")
+                    _recommendedArticles.value = response.body()
+                    Log.d(TAG, "Articles fetched: ${response.body()}")
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
 
-            override fun onFailure(call: Call<RecomArticleResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<RecomArticleResponseItem>>, t: Throwable) {
                 _recomArticleisLoading.value = false
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }

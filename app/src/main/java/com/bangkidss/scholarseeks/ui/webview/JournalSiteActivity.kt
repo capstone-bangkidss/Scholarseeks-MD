@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkidss.scholarseeks.R
+import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.data_dummy.JournalRfy
 import com.bangkidss.scholarseeks.databinding.ActivityJournalSiteBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
@@ -31,7 +32,7 @@ class JournalSiteActivity : AppCompatActivity() {
         }
 
         val dataJournal = if (Build.VERSION.SDK_INT >= 33) {
-            intent.getParcelableExtra(DetailJournalActivity.EXTRA_DETAIL, JournalRfy::class.java)
+            intent.getParcelableExtra(DetailJournalActivity.EXTRA_DETAIL, RecomArticleResponseItem::class.java)
         } else {
             @Suppress("DEPRECATION")
             intent.getParcelableExtra(DetailJournalActivity.EXTRA_DETAIL)
@@ -47,6 +48,6 @@ class JournalSiteActivity : AppCompatActivity() {
 
         binding.webView.webChromeClient = WebChromeClient()
 
-        binding.webView.loadUrl(dataJournal?.doi.toString())
+        binding.webView.loadUrl("https://doi.org/${dataJournal?.dOI.toString()}")
     }
 }

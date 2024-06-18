@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
-import com.bangkidss.scholarseeks.data_dummy.JournalRfy
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
@@ -26,7 +25,7 @@ class ListJournalAdapter(private val listJournal: List<RecomArticleResponseItem>
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listJournal.size.coerceAtMost(5)
+    override fun getItemCount(): Int = listJournal.size.coerceAtMost(10)
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val journal = listJournal[position]
@@ -36,10 +35,10 @@ class ListJournalAdapter(private val listJournal: List<RecomArticleResponseItem>
             tvYear.text = journal.year.toString()
 
             keywordContainer.removeAllViews()
-            journal.indexKeywords.forEach { keyword ->
+            journal.indexKeywords.split(";").take(4).forEach { keyword ->
                 keyword.let {
                     val textView = TextView(root.context).apply {
-                        text = it.toString()
+                        text = it
                         layoutParams = FlexboxLayout.LayoutParams(
                             FlexboxLayout.LayoutParams.WRAP_CONTENT,
                             FlexboxLayout.LayoutParams.WRAP_CONTENT

@@ -27,5 +27,5 @@ interface ApiService {
     fun getRecommendationArticle(
         @Header("Authorization") jwt_token: String,
         @Body recommendationArticleRequest: RecomArticleRequest
-    ) : Call<RecomArticleResponse>
+    ) : Call<List<RecomArticleResponseItem>>
 }
