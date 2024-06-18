@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkidss.scholarseeks.GetStartedActivity
 import com.bangkidss.scholarseeks.R
@@ -15,6 +16,8 @@ import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.databinding.FragmentExploreBinding
 import com.bangkidss.scholarseeks.databinding.FragmentProfileBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
 class ProfileFragment : Fragment() {
 
@@ -56,8 +59,17 @@ class ProfileFragment : Fragment() {
 
     private fun logOut() {
         mUserPreference.clearUser()
-        val intentGetStarted = Intent(requireContext(), GetStartedActivity::class.java)
-        startActivity(intentGetStarted)
-        requireActivity().finish()
+        val googleSignInClient = GoogleSignIn.getClient(requireContext(), GoogleSignInOptions.DEFAULT_SIGN_IN)
+        googleSignInClient.signOut().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Google Sign out successful, navigate to GetStartedActivity
+                val intentGetStarted = Intent(requireContext(), GetStartedActivity::class.java)
+                startActivity(intentGetStarted)
+                requireActivity().finish()
+            } else {
+                // Handle sign out failure (optional)
+                Toast.makeText(requireContext(), "Failed to log out from Google", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

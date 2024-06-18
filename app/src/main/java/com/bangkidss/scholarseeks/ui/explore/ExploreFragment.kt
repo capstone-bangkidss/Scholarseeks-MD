@@ -1,5 +1,6 @@
 package com.bangkidss.scholarseeks.ui.explore
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -18,6 +20,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkidss.scholarseeks.AuthDialogUtils
+import com.bangkidss.scholarseeks.AuthResultCallback
 import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
@@ -30,7 +33,7 @@ import com.bangkidss.scholarseeks.ui.detailJournal.JournalModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class ExploreFragment : Fragment() {
+class ExploreFragment : Fragment(), AuthResultCallback {
 
     private var _binding: FragmentExploreBinding? = null
     private lateinit var adapter: SearchAdapter
@@ -44,6 +47,16 @@ class ExploreFragment : Fragment() {
 
     private lateinit var exploreViewModel: ExploreViewModel
 
+    private val googleSignInResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // Handle the result from Google Sign-In
+            AuthDialogUtils.handleSignInResult(result.data)
+        } else {
+            Log.e("YourFragment", "Google Sign-In failed")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,22 +75,6 @@ class ExploreFragment : Fragment() {
         setupSearch()
         observeViewModel()
 
-//        with(binding) {
-//            searchViewExplore.setupWithSearchBar(searchBarExplore)
-//            searchViewExplore
-//                .editText
-//                .setOnEditorActionListener { textView, actionId, event ->
-//                    searchBarExplore.setText(searchViewExplore.text)
-//                    searchViewExplore.hide()
-//                    Toast.makeText(context, searchViewExplore.text, Toast.LENGTH_SHORT).show()
-//                    false
-//                }
-//        }
-
-//        val textView: TextView = binding.textDashboard
-//        exploreViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         return root
     }
 
@@ -88,8 +85,9 @@ class ExploreFragment : Fragment() {
 
         adapter = SearchAdapter(
             itemClickListener = { journalItem ->
-                val login = true
-                if (login) {
+                Log.d("itemClick", "$userModel")
+                val login = false
+                if (!userModel.id_token.isNullOrEmpty()) {
 
                     val dataJournal = RecomArticleResponseItem(
                         title = (journalItem.title) ?: "",
@@ -109,7 +107,7 @@ class ExploreFragment : Fragment() {
                 } else {
                     val dialogTitle = "Register for access"
                     val skip = true
-                    AuthDialogUtils.showDialog(binding.root.context, title = dialogTitle, skip = skip)
+                    AuthDialogUtils.showDialog(requireContext(), title = dialogTitle, skip = skip, signInResultLauncher = googleSignInResultLauncher, callback = this@ExploreFragment)
                 }
             }
         )
@@ -206,6 +204,28 @@ class ExploreFragment : Fragment() {
         }
     }
 
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == AuthDialogUtils.RC_SIGN_IN) {
+//            AuthDialogUtils.handleSignInResult(data, { idToken ->
+//                Log.d("Subject", "idToken: $idToken")
+//            }, { exception ->
+//                Log.e("Subject", "Failed")
+//            })
+//        }
+//    }
+
+//    val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+//        if (result.resultCode == AuthDialogUtils.RC_SIGN_IN) {
+//            AuthDialogUtils.handleSignInResult(result.data, { idToken ->
+//                Log.d("Subject", "idToken: $idToken")
+//            }, { exception ->
+//                Log.e("Subject", "Failed")
+//            })
+//        }
+//    }
+
 //    private fun showRegisterDialog() {
 //        val dialogView = LayoutInflater.from(binding.root.context).inflate(R.layout.dialog_auth, null)
 //        val dialog = AlertDialog.Builder(binding.root.context)
@@ -215,6 +235,14 @@ class ExploreFragment : Fragment() {
 //        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 //        dialog.show()
 //    }
+
+    override fun onAuthSuccess(userModel: UserModel) {
+        this.userModel = userModel
+    }
+
+    override fun onAuthFailure() {
+        Log.e("ExploreFragment", "Auth failure")
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

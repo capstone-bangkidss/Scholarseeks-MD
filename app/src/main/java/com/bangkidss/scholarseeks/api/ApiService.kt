@@ -23,6 +23,13 @@ interface ApiService {
         @Header("Authorization") jwt_token: String
     ) : SearchResponse
 
+    @POST("auth/google")
+    fun authGoogle(
+        @Header("Authorization") jwt_token: String,
+        @Body authRequest: AuthRequest
+    ) : Call<AuthResponse>
+
+
     @POST("/content-model/get-articles")
     fun getRecommendationArticle(
         @Header("Authorization") jwt_token: String,
