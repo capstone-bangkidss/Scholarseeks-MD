@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
-import com.bangkidss.scholarseeks.data_dummy.JournalCollab
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout

@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
-import com.bangkidss.scholarseeks.data_dummy.JournalRfy
 import com.bangkidss.scholarseeks.databinding.ActivityJournalSiteBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 
