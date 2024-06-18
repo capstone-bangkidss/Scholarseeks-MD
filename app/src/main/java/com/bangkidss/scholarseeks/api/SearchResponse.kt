@@ -50,7 +50,7 @@ data class ArticlesItem(
 	val title: String? = null,
 
 	@field:SerializedName("DOI")
-	val DOI: String? = null,
+	val dOI: String? = null,
 
 	@field:SerializedName("authors")
 	val authors: String? = null,
