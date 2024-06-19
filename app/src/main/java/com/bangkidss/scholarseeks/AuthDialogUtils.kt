@@ -37,6 +37,8 @@ object AuthDialogUtils {
     private var authResultCallback: AuthResultCallback? = null
     private var authDialog: AlertDialog? = null
 
+    var userPhotoUrl: String? = null
+
     fun showDialog(context: Context, title: String? = null, skip: Boolean, signInResultLauncher: ActivityResultLauncher<Intent>, callback: AuthResultCallback) {
 
         userPreference = UserPreference(context)
@@ -97,6 +99,9 @@ object AuthDialogUtils {
         try {
             val account = task.getResult(ApiException::class.java)
             val idToken = account?.idToken
+
+            userPhotoUrl = account.photoUrl?.toString()
+
             idToken?.let {
                 sendTokenToApi(it)
             } ?: Log.e("authdialoutils", "id tioken is null")
@@ -119,10 +124,15 @@ object AuthDialogUtils {
                         val authResponse = response.body()
                         val jwtToken = authResponse?.jwtToken
                         val userId = authResponse?.user?.userId
+                        val userName = authResponse?.user?.name
+                        val userEmail = authResponse?.user?.email
                         if (jwtToken != null && userId != null) {
                             userModel.id_token = idToken
                             userModel.user_id = userId
                             userModel.jwt_token = jwtToken
+                            userModel.user_name = userName
+                            userModel.user_email = userEmail
+                            userModel.user_photo = userPhotoUrl
                             userPreference.setUser(userModel)
                             Log.d("AuthDialogUtils", "UserModel updated: $userModel")
                             authResultCallback?.onAuthSuccess(userModel)
