@@ -25,7 +25,7 @@ interface ApiService {
 
     @POST("auth/google")
     fun authGoogle(
-        @Header("Authorization") jwt_token: String,
+        @Header("Authorization") jwt_token: String?,
         @Body authRequest: AuthRequest
     ) : Call<AuthResponse>
 

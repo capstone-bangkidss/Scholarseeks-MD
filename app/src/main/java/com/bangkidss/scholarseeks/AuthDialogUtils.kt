@@ -48,7 +48,7 @@ object AuthDialogUtils {
 
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_auth, null)
         val btnRegister: Button = dialogView.findViewById(R.id.btn_signup)
-        val btnLogin: Button = dialogView.findViewById(R.id.btn_signin)
+//        val btnLogin: Button = dialogView.findViewById(R.id.btn_signin)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(context.getString(R.string.server_client_id))
@@ -63,9 +63,9 @@ object AuthDialogUtils {
         }
 
         if (skip == false) {
-            val divider: View = dialogView.findViewById(R.id.divider)
+//            val divider: View = dialogView.findViewById(R.id.divider)
             val btnSkip: Button = dialogView.findViewById(R.id.btn_skip)
-            divider.visibility = View.GONE
+//            divider.visibility = View.GONE
             btnSkip.visibility = View.GONE
         }
 
@@ -81,9 +81,9 @@ object AuthDialogUtils {
             dialog.dismiss()
         }
 
-        btnLogin.setOnClickListener {
-            // login
-        }
+//        btnLogin.setOnClickListener {
+//            // login
+//        }
 
         btnRegister.setOnClickListener {
             // register
@@ -115,9 +115,10 @@ object AuthDialogUtils {
         val user_id = user.user_id
         val jwt_token = user.jwt_token
 
-        if (user_id != null && jwt_token != null) {
+        if (idToken != null) {
             val authRequest = AuthRequest(idToken, user_id)
-            val call = apiService.authGoogle("Bearer $jwt_token", authRequest)
+            val jwtTokenHeader = if (jwt_token.isNullOrEmpty()) null else "Bearer $jwt_token"
+            val call = apiService.authGoogle(jwtTokenHeader, authRequest)
             call.enqueue(object : Callback<AuthResponse> {
                 override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                     if (response.isSuccessful) {
