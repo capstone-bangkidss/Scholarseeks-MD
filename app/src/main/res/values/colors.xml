@@ -9,4 +9,5 @@
     <color name="shape_color">#FFFFFFFF</color>
     <color name="base_color">#FF000000</color>
     <color name="icon_border_grey">#8894B6</color>
+    <color name="profile_top">#181F32</color>
 </resources>

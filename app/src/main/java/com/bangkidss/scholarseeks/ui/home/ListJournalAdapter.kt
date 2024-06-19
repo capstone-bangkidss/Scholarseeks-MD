@@ -1,27 +1,41 @@
 package com.bangkidss.scholarseeks.ui.home
 
+import android.content.Context
 import android.content.Intent
+import android.os.Handler.Callback
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkidss.scholarseeks.AuthDialogUtils
+import com.bangkidss.scholarseeks.AuthResultCallback
 import com.bangkidss.scholarseeks.R
+import com.bangkidss.scholarseeks.UserModel
+import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
 
-class ListJournalAdapter(private val listJournal: List<RecomArticleResponseItem>) :
+class ListJournalAdapter(private val context: Context, private val googleSignInAccount: ActivityResultLauncher<Intent>, private val callback: AuthResultCallback, private val listJournal: List<RecomArticleResponseItem>) :
     RecyclerView.Adapter<ListJournalAdapter.ListViewHolder>() {
+
+    private lateinit var mUserPreference: UserPreference
+    private lateinit var userModel: UserModel
+
     inner class ListViewHolder(val binding: JournalCardBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = JournalCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        mUserPreference = UserPreference(context)
+        userModel = mUserPreference.getUser()
         return ListViewHolder(binding)
     }
 
@@ -59,13 +73,19 @@ class ListJournalAdapter(private val listJournal: List<RecomArticleResponseItem>
         }
         // melakukan perpindahan ke detail journal menggunakan intent
         holder.itemView.setOnClickListener {
-            val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
-            @Suppress("DEPRECATION")
-            intentDetail.putExtra(
-                DetailJournalActivity.EXTRA_DETAIL,
-                listJournal[holder.adapterPosition]
-            )
-            holder.itemView.context.startActivity(intentDetail)
+            if (userModel.id_token.isNullOrEmpty()) {
+                val dialogTitle = "Register for access"
+                val skip = true
+                AuthDialogUtils.showDialog(context, title = dialogTitle, skip = skip, signInResultLauncher = googleSignInAccount, callback = callback)
+            } else {
+                val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
+                @Suppress("DEPRECATION")
+                intentDetail.putExtra(
+                    DetailJournalActivity.EXTRA_DETAIL,
+                    listJournal[holder.adapterPosition]
+                )
+                holder.itemView.context.startActivity(intentDetail)
+            }
         }
     }
 }

@@ -8,4 +8,5 @@
     <color name="fourth">#EEEEEE</color>
     <color name="shape_color">#181F32</color>
     <color name="base_color">#FFFFFFFF</color>
+    <color name="profile_top">#00ADB5</color>
 </resources>
