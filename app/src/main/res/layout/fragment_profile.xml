@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/accent"
+    android:background="@color/profile_top"
     tools:context=".ui.profile.ProfileFragment">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="50dp"
         android:textAlignment="center"
         android:text="Profile"
+        android:fontFamily="@font/poppins_regular"
         android:textSize="24sp"
         android:textColor="@color/white" />
 
@@ -36,8 +37,9 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
+            android:background="@color/shape_color"
             app:shapeAppearanceOverlay="@style/CircleImageView"
-            android:padding="4dp"
+            android:padding="2dp"
             android:src="@drawable/default_user_photo" />
 
         <TextView

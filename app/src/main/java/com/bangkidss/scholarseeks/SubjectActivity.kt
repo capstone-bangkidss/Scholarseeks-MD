@@ -1,5 +1,6 @@
 package com.bangkidss.scholarseeks
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.doOnPreDraw
 import com.bangkidss.scholarseeks.api.ApiConfig
 import com.bangkidss.scholarseeks.api.SubjectAreaRequest
@@ -22,17 +24,34 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SubjectActivity : AppCompatActivity() {
+class SubjectActivity : AppCompatActivity(), AuthResultCallback {
 
     private lateinit var binding: ActivitySubjectBinding
 
     private lateinit var autoCompleteTextView: MaterialAutoCompleteTextView
     private val suggestions = listOf("Science", "Technology", "Medic", "Education", "Civilization", "Law", "Artificial Intelligent", "Machine Learning", "Decision Making System", "Game", "Android", "Cloud", "Programming", "Analyst", "Agriculture", "Music", "Movie", "Philosophy", "Chemistry", "Physic", "Psychology", "Biology", "Archeology")
 
+    private lateinit var mUserPreference: UserPreference
+    private lateinit var userModel: UserModel
+
+    private val googleSignInResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // Handle the result from Google Sign-In
+            AuthDialogUtils.handleSignInResult(result.data)
+        } else {
+            Log.e("YourFragment", "Google Sign-In failed")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySubjectBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mUserPreference = UserPreference(this)
+        userModel = mUserPreference.getUser()
 
         supportActionBar?.hide()
 
@@ -89,7 +108,7 @@ class SubjectActivity : AppCompatActivity() {
         }
 
         binding.btnLogin.setOnClickListener {
-//            AuthDialogUtils.showDialog(this, "Login to an existing account", false)
+            AuthDialogUtils.showDialog(this, "Login to an existing account", true, signInResultLauncher = googleSignInResultLauncher, callback = this@SubjectActivity)
         }
     }
 
@@ -107,6 +126,17 @@ class SubjectActivity : AppCompatActivity() {
         val intentHome = Intent(this, HomeActivity::class.java)
         startActivity(intentHome)
 
+    }
+
+    override fun onAuthSuccess(userModel: UserModel) {
+        this.userModel = userModel
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onAuthFailure() {
+        Log.e("ExploreFragment", "Auth failure")
     }
 
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

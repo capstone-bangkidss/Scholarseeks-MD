@@ -58,8 +58,13 @@ class ProfileFragment : Fragment() {
 
         val root: View = binding.root
 
-        binding.userName.text = userModel.user_name
-        binding.userEmail.text = userModel.user_email
+        if (userModel.user_name.isNullOrEmpty() && userModel.user_email.isNullOrEmpty()) {
+            binding.userName.text = "Guest account"
+            binding.userEmail.text = "You need an account to get full access"
+        } else {
+            binding.userName.text = userModel.user_name
+            binding.userEmail.text = userModel.user_email
+        }
 
         val ImageViewuserPhoto: ImageView = binding.userPhoto
 
