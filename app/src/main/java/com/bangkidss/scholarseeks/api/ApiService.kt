@@ -5,6 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -46,5 +47,11 @@ interface ApiService {
     fun getCollaborativeArticle(
         @Header("Authorization") jwt_token: String,
         @Body userId: UserId
+    ) : Call<List<RecomArticleResponseItem>>
+
+    @GET("articles/rating/{user_id}")
+    fun getRatedArticle(
+        @Header("Authorization") jwt_token: String,
+        @Path("user_id") userId: String
     ) : Call<List<RecomArticleResponseItem>>
 }
