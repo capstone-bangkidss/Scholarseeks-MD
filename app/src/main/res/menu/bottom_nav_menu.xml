@@ -12,9 +12,9 @@
         android:title="@string/title_explore" />
 
     <item
-        android:id="@+id/navigation_favorite"
-        android:icon="@drawable/icon_favorite"
-        android:title="@string/title_favorite" />
+        android:id="@+id/navigation_rated_article"
+        android:icon="@drawable/icon_rate"
+        android:title="@string/rated_article" />
 
     <item
         android:id="@+id/navigation_profile"
