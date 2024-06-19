@@ -15,4 +15,9 @@
         <item name="android:layout_weight">1</item>
         <item name="cornerRadius">30dp</item>
     </style>
+
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

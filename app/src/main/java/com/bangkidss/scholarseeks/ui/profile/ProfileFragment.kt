@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkidss.scholarseeks.GetStartedActivity
@@ -16,6 +17,7 @@ import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.databinding.FragmentExploreBinding
 import com.bangkidss.scholarseeks.databinding.FragmentProfileBinding
+import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
@@ -38,6 +40,8 @@ class ProfileFragment : Fragment() {
 //         TODO: Use the ViewModel
         mUserPreference = UserPreference(requireContext())
         userModel = mUserPreference.getUser()
+
+
     }
 
     override fun onCreateView(
@@ -45,7 +49,7 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.logOut.setOnClickListener {
@@ -53,6 +57,17 @@ class ProfileFragment : Fragment() {
         }
 
         val root: View = binding.root
+
+        binding.userName.text = userModel.user_name
+        binding.userEmail.text = userModel.user_email
+
+        val ImageViewuserPhoto: ImageView = binding.userPhoto
+
+        if (!userModel.user_photo.isNullOrEmpty()) {
+            Glide.with(this)
+                .load(userModel.user_photo)
+                .into(ImageViewuserPhoto)
+        }
 
         return root
     }
