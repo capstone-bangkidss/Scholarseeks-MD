@@ -42,11 +42,8 @@ class DetailJournalActivity : AppCompatActivity() {
 
     // Get colors from resources
     private val colors = arrayOf(
-        R.color.colorOrange,
-        R.color.colorGreen,
-        R.color.colorLightBlue,
-        R.color.colorPink,
-        R.color.colorIndigo
+        R.color.colorDarkBlue,
+        R.color.colorCyan
     )
 
 
@@ -82,7 +79,7 @@ class DetailJournalActivity : AppCompatActivity() {
             binding.tvAuthor.text = dataJournal.authors
             binding.tvYear.text = dataJournal.year.toString()
             binding.tvAbstract.text = dataJournal.abstract
-            
+
             binding.keywordContainer.removeAllViews()
             dataJournal.indexKeywords.split(";").forEach { keyword ->
                 keyword.let {

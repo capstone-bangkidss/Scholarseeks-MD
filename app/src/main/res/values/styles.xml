@@ -11,13 +11,13 @@
     
     <style name="text.journalTitle">
         <item name="android:fontFamily">@font/poppins_semibold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="text.regular12sp">
+    <style name="text.regular14sp">
         <item name="android:fontFamily">@font/poppins_light</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 

@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         app:cardCornerRadius="24dp"
-        android:backgroundTint="@android:color/transparent"
+        android:backgroundTint="@color/white"
         app:strokeWidth="1dp">
 
         <LinearLayout
@@ -33,13 +33,13 @@
 
             <TextView
                 android:id="@+id/tv_author"
-                style="@style/text.regular12sp"
+                style="@style/text.regular14sp"
                 android:maxLines="3"
                 tools:text="Priyaadharshini M, Natha Mayil N, R Dakshina, Sandhya S., Bettina Shirley R" />
 
             <TextView
                 android:id="@+id/tv_year"
-                style="@style/text.regular12sp"
+                style="@style/text.regular14sp"
                 tools:text="19 June 2020" />
 
             <LinearLayout

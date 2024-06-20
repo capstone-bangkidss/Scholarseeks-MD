@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="@color/primary"
+        android:centerColor="#61709B"
+        android:endColor="@color/white"
+        android:angle="270"
+        android:centerY="0.01"/> <!-- Warna utama hanya sampai 20% diatas -->
+</shape>

@@ -36,11 +36,8 @@ class ListJournalCollabAdapter(
 
     // Get colors from resources
     private val colors = arrayOf(
-        R.color.colorOrange,
-        R.color.colorGreen,
-        R.color.colorLightBlue,
-        R.color.colorPink,
-        R.color.colorIndigo
+        R.color.colorDarkBlue,
+        R.color.colorCyan
     )
 
     inner class ListViewHolder(val binding: JournalCardBinding) :

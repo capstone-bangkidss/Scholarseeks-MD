@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorOrange">#ECBD91</color>
-    <color name="colorGreen">#52DC86</color>
-    <color name="colorLightBlue">#29B6F6</color>
-    <color name="colorPink">#D185CA</color>
-    <color name="colorIndigo">#7E57C2</color>
+    <color name="colorDarkBlue">#181F32</color>
+    <color name="colorCyan">#00ADB5</color>
 </resources>

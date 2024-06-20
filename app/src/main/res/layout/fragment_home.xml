@@ -38,6 +38,7 @@
         <TextView
             android:id="@+id/tv_rfy"
             style="@style/text.Bold20sp"
+            android:textColor="@color/primary"
             android:text="@string/recommendation_for_you"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -48,6 +49,7 @@
             android:id="@+id/tv_collaborative"
             style="@style/text.Bold20sp"
             android:layout_marginTop="20dp"
+            android:textColor="@color/primary"
             android:text="@string/you_may_also_like"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
