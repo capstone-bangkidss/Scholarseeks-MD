@@ -4,6 +4,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -37,12 +38,12 @@ interface ApiService {
         @Body ratingRequest: RatingRequest
     ) : Call<RatingResponse>
 
-    @DELETE("articles/rating")
+    @HTTP(method = "DELETE", path = "articles/rating", hasBody = true)
     fun unrateArticle(
         @Header("Authorization") jwt_token: String,
-        @Query("article_id") article_id: String,
-        @Query("user_id") user_id: String,
-//        @Body ratingRequest: RatingRequest
+//        @Query("article_id") article_id: String,
+//        @Query("user_id") user_id: String,
+        @Body ratingRequest: RatingRequest
     ) : Call<RatingResponse>
 
 

@@ -51,7 +51,7 @@ class RatedArticleViewModel : ViewModel() {
 
     fun unrateArticles(jwtToken: String, userId: String, article_id: String) {
         val ratingRequest = RatingRequest(null, article_id, userId)
-        val client = ApiConfig.getApiService().unrateArticle("Bearer $jwtToken", article_id, userId)
+        val client = ApiConfig.getApiService().unrateArticle("Bearer $jwtToken", ratingRequest)
         client.enqueue(object : Callback<RatingResponse> {
             override fun onResponse(
                 call: Call<RatingResponse>,
