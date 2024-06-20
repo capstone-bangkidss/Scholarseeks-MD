@@ -59,14 +59,15 @@ class ListRatedArticleAdapter(
                 }
             }
         }
-        val intentDetail =
-            Intent(holder.itemView.context, DetailJournalActivity::class.java)
-        @Suppress("DEPRECATION")
-        intentDetail.putExtra(
-            DetailJournalActivity.EXTRA_DETAIL,
-            listMyRatingArticle[holder.adapterPosition]
-        )
-        holder.itemView.context.startActivity(intentDetail)
+        holder.itemView.setOnClickListener {
+            val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
+            @Suppress("DEPRECATION")
+            intentDetail.putExtra(
+                DetailJournalActivity.EXTRA_DETAIL,
+                listMyRatingArticle[holder.adapterPosition]
+            )
+            holder.itemView.context.startActivity(intentDetail)
+        }
     }
 
     fun updateArticles(newArticles: List<RecomArticleResponseItem>) {

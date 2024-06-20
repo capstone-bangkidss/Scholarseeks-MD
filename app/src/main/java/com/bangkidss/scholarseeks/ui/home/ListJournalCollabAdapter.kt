@@ -77,11 +77,22 @@ class ListJournalCollabAdapter(private val context: Context, private val googleS
                 val skip = true
                 AuthDialogUtils.showDialog(context, title = dialogTitle, skip = skip, signInResultLauncher = googleSignInAccount, callback = callback)
             } else {
+
+                val dataJournal = RecomArticleResponseItem(
+                    articleId = journal.articleId ?: 0,
+                    title = (journal.title) ?: "",
+                    dOI = journal.dOI ?: "",
+                    authors = journal.authors ?: "",
+                    year = journal.year ?: 0,
+                    abstract = journal.abstract ?: "",
+                    indexKeywords = journal.indexKeywords ?: ""
+                )
+
                 val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
                 @Suppress("DEPRECATION")
                 intentDetail.putExtra(
                     DetailJournalActivity.EXTRA_DETAIL,
-                    listJournal[holder.adapterPosition]
+                    dataJournal
                 )
                 holder.itemView.context.startActivity(intentDetail)
             }
