@@ -3,7 +3,7 @@
     <gradient
         android:startColor="@color/primary"
         android:centerColor="#61709B"
-        android:endColor="@color/white"
+        android:endColor="@android:color/transparent"
         android:angle="270"
-        android:centerY="0.01"/> <!-- Warna utama hanya sampai 20% diatas -->
+        android:centerY="0.01"/>
 </shape>
