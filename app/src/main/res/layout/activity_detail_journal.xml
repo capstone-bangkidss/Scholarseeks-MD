@@ -55,6 +55,7 @@
                 android:layout_marginTop="16dp"
                 android:numStars="5"
                 android:rating="0"
+                android:stepSize="1"
                 style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:isIndicator="false"
                 android:layout_gravity="center" />
