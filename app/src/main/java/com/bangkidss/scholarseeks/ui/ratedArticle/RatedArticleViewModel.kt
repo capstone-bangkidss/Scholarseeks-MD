@@ -27,7 +27,6 @@ class RatedArticleViewModel : ViewModel() {
 
     fun getRatedArticles(jwtToken: String, userId: String) {
         _isLoading.value = true
-        val request = UserId(userId)
         val client = ApiConfig.getApiService().getRatedArticle("Bearer $jwtToken", userId)
         client.enqueue(object : Callback<List<RecomArticleResponseItem>> {
             override fun onResponse(

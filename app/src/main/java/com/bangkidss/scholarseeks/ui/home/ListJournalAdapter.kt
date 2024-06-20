@@ -1,13 +1,10 @@
-package com.bangkidss.scholarseeks.ui.home
-
 import android.content.Context
 import android.content.Intent
-import android.os.Handler.Callback
+import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
@@ -22,6 +19,7 @@ import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
+import kotlin.random.Random
 
 class ListJournalAdapter(
     private val context: Context,
@@ -33,6 +31,15 @@ class ListJournalAdapter(
 
     private lateinit var mUserPreference: UserPreference
     private lateinit var userModel: UserModel
+
+    // Get colors from resources
+    private val colors = arrayOf(
+        R.color.colorOrange,
+        R.color.colorGreen,
+        R.color.colorLightBlue,
+        R.color.colorPink,
+        R.color.colorIndigo
+    )
 
     inner class ListViewHolder(val binding: JournalCardBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -65,11 +72,19 @@ class ListJournalAdapter(
                             setMargins(0, 12, 8, 12) // Equivalent to padding with top margin
                         }
 
-                        setBackgroundResource(R.drawable.rounded_textview) // Background resource
+                        val backgroundColor =
+                            ContextCompat.getColor(context, colors[Random.nextInt(colors.size)])
+                        val drawable = ContextCompat.getDrawable(
+                            context,
+                            R.drawable.rounded_textview
+                        ) as GradientDrawable
+                        drawable.setColor(backgroundColor)
+
+                        background = drawable
                         setPadding(16, 8, 16, 8) // Padding
                         typeface = ResourcesCompat.getFont(context, R.font.poppins_medium) // Font
                         setTextColor(ContextCompat.getColor(context, R.color.white)) // Text color
-                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f) // Text size in SP
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f) // Text size in SP
                         textAlignment = View.TEXT_ALIGNMENT_CENTER // Text alignment
                     }
                     keywordContainer.addView(textView)
@@ -89,7 +104,6 @@ class ListJournalAdapter(
                     callback = callback
                 )
             } else {
-
                 val dataJournal = RecomArticleResponseItem(
                     articleId = journal.articleId ?: 0,
                     title = (journal.title) ?: "",
