@@ -64,7 +64,7 @@ class DetailJournalActivity : AppCompatActivity() {
             insets
         }
 
-        supportActionBar?.title = "Journal"
+        supportActionBar?.title = "Article Detail"
 
         val dataJournal = if (Build.VERSION.SDK_INT >= 33) {
             intent.getParcelableExtra(EXTRA_DETAIL, RecomArticleResponseItem::class.java)
