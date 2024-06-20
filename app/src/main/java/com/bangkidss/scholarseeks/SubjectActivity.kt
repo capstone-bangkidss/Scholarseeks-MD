@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -70,6 +72,25 @@ class SubjectActivity : AppCompatActivity(), AuthResultCallback {
                 autoCompleteTextView.showDropDown()
             }
         }
+
+        // Disable the button initially if the text is empty
+        binding.btnRegister.isEnabled = !autoCompleteTextView.text.isNullOrEmpty()
+
+        // Add a TextWatcher to the AutoCompleteTextView
+        autoCompleteTextView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // Enable the button if the text is not empty
+                binding.btnRegister.isEnabled = !s.isNullOrEmpty()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No action needed before text is changed
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No action needed when text is changed
+            }
+        })
 
 
         binding.btnRegister.setOnClickListener {
