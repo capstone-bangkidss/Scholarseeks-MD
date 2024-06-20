@@ -1,6 +1,7 @@
 package com.bangkidss.scholarseeks.ui.detailJournal
 
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.media.Rating
 import android.os.Build
 import android.os.Bundle
@@ -30,6 +31,7 @@ import com.google.android.flexbox.FlexboxLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.random.Random
 
 class DetailJournalActivity : AppCompatActivity() {
 
@@ -37,6 +39,15 @@ class DetailJournalActivity : AppCompatActivity() {
     private lateinit var apiService: ApiService
     private lateinit var userPreference: UserPreference
     private lateinit var userModel: UserModel
+
+    // Get colors from resources
+    private val colors = arrayOf(
+        R.color.colorOrange,
+        R.color.colorGreen,
+        R.color.colorLightBlue,
+        R.color.colorPink,
+        R.color.colorIndigo
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,11 +95,19 @@ class DetailJournalActivity : AppCompatActivity() {
                             setMargins(0, 12, 8, 12) // Equivalent to padding with top margin
                         }
 
-                        setBackgroundResource(R.drawable.rounded_textview) // Background resource
+                        val backgroundColor =
+                            ContextCompat.getColor(context, colors[Random.nextInt(colors.size)])
+                        val drawable = ContextCompat.getDrawable(
+                            context,
+                            R.drawable.rounded_textview
+                        ) as GradientDrawable
+                        drawable.setColor(backgroundColor)
+
+                        background = drawable
                         setPadding(16, 8, 16, 8) // Padding
                         typeface = ResourcesCompat.getFont(context, R.font.poppins_medium) // Font
                         setTextColor(ContextCompat.getColor(context, R.color.white)) // Text color
-                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 8f) // Text size in SP
+                        setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f) // Text size in SP
                         textAlignment = View.TEXT_ALIGNMENT_CENTER // Text alignment
                     }
                     binding.keywordContainer.addView(textView)

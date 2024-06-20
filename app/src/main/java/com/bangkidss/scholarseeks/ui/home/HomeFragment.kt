@@ -79,7 +79,8 @@ class HomeFragment : Fragment(), AuthResultCallback {
         viewModel.recommendedArticles.observe(viewLifecycleOwner, Observer { articles ->
             articles?.let {
                 Log.d("HomeFragment", "Articles updated: $articles")
-                val adapter = ListJournalAdapter(requireContext(), googleSignInResultLauncher, this,  articles)
+                val adapter =
+                    ListJournalAdapter(requireContext(), googleSignInResultLauncher, this, articles)
                 binding.rvJournal.adapter = adapter
             }
         })
@@ -93,7 +94,12 @@ class HomeFragment : Fragment(), AuthResultCallback {
         viewModel.collaborativeArticle.observe(viewLifecycleOwner, Observer { articles ->
             articles?.let {
                 Log.d("HomeFragment", "Articles updated: $articles")
-                val adapter = ListJournalCollabAdapter(requireContext(), googleSignInResultLauncher, this , articles)
+                val adapter = ListJournalCollabAdapter(
+                    requireContext(),
+                    googleSignInResultLauncher,
+                    this,
+                    articles
+                )
                 binding.rvJournalCollaborative.adapter = adapter
             }
         })
