@@ -90,17 +90,17 @@ class ListJournalAdapter(
         }
         // melakukan perpindahan ke detail journal menggunakan intent
         holder.itemView.setOnClickListener {
-//            if (userModel.id_token.isNullOrEmpty()) {
-//                val dialogTitle = "Register for access"
-//                val skip = true
-//                AuthDialogUtils.showDialog(
-//                    context,
-//                    title = dialogTitle,
-//                    skip = skip,
-//                    signInResultLauncher = googleSignInAccount,
-//                    callback = callback
-//                )
-//            } else {
+            if (userModel.id_token.isNullOrEmpty()) {
+                val dialogTitle = "Register for access"
+                val skip = true
+                AuthDialogUtils.showDialog(
+                    context,
+                    title = dialogTitle,
+                    skip = skip,
+                    signInResultLauncher = googleSignInAccount,
+                    callback = callback
+                )
+            } else {
                 val dataJournal = RecomArticleResponseItem(
                     articleId = journal.articleId ?: 0,
                     title = (journal.title) ?: "",
@@ -120,6 +120,6 @@ class ListJournalAdapter(
                 )
                 holder.itemView.context.startActivity(intentDetail)
             }
-//        }
+        }
     }
 }
