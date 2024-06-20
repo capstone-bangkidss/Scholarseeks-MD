@@ -120,7 +120,7 @@ class SubjectActivity : AppCompatActivity(), AuthResultCallback {
         userModel.jwt_token = jwt_token
 
         userPreference.setUser(userModel)
-        Toast.makeText(this, "berhasil mengirim subject area $user_id and $jwt_token", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, "berhasil mengirim subject area $user_id and $jwt_token", Toast.LENGTH_SHORT).show()
 
 
         val intentHome = Intent(this, HomeActivity::class.java)
