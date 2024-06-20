@@ -1,5 +1,6 @@
 package com.bangkidss.scholarseeks.ui.home
 
+import ListJournalAdapter
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log

@@ -22,4 +22,7 @@
     <string name="server_client_id">143242379016-3mjs40gk39r1hset8skqmvs9ahnonnrj.apps.googleusercontent.com</string>
     <string name="journal_abstract">Abstract</string>
     <string name="visit_site">Visit Site</string>
+    <string name="rate_this_article">Rate this Article</string>
+    <string name="rated_article">Rated Article</string>
+    <string name="tell_others_what_you_think">Tell others what you think</string>
 </resources>

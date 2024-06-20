@@ -33,4 +33,7 @@ data class RecomArticleResponseItem(
 
 	@field:SerializedName("authors")
 	val authors: String,
+
+	@field:SerializedName("rated_users")
+	val ratedUsers: List<Int> = emptyList(),
 ) : Parcelable

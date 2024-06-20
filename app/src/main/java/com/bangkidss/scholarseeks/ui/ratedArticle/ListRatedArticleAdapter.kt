@@ -1,18 +1,18 @@
-package com.bangkidss.scholarseeks.ui.home
+package com.bangkidss.scholarseeks.ui.ratedArticle
 
 import android.content.Context
 import android.content.Intent
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkidss.scholarseeks.AuthDialogUtils
-import com.bangkidss.scholarseeks.AuthResultCallback
 import com.bangkidss.scholarseeks.R
 import com.bangkidss.scholarseeks.UserModel
 import com.bangkidss.scholarseeks.UserPreference
@@ -20,9 +20,14 @@ import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class ListJournalCollabAdapter(private val context: Context, private val googleSignInAccount: ActivityResultLauncher<Intent>, private val callback: AuthResultCallback, private val listJournal: List<RecomArticleResponseItem>) :
-    RecyclerView.Adapter<ListJournalCollabAdapter.ListViewHolder>() {
+class ListRatedArticleAdapter(
+    private val context: Context,
+    private val viewModel: RatedArticleViewModel,
+    private var listMyRatingArticle: List<RecomArticleResponseItem>
+) : RecyclerView.Adapter<ListRatedArticleAdapter.ListViewHolder>() {
 
     private lateinit var mUserPreference: UserPreference
     private lateinit var userModel: UserModel
@@ -37,10 +42,10 @@ class ListJournalCollabAdapter(private val context: Context, private val googleS
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listJournal.size
+    override fun getItemCount(): Int = listMyRatingArticle.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val journal = listJournal[position]
+        val journal = listMyRatingArticle[position]
         holder.binding.apply {
             tvTitle.text = journal.title
             tvAuthor.text = journal.authors
@@ -68,36 +73,28 @@ class ListJournalCollabAdapter(private val context: Context, private val googleS
                     keywordContainer.addView(textView)
                 }
             }
-        }
-
-        // melakukan perpindahan ke detail journal menggunakan intent
-        holder.itemView.setOnClickListener {
-            if (userModel.id_token.isNullOrEmpty()) {
-                val dialogTitle = "Register for access"
-                val skip = true
-                AuthDialogUtils.showDialog(context, title = dialogTitle, skip = skip, signInResultLauncher = googleSignInAccount, callback = callback)
-            } else {
-
-                val dataJournal = RecomArticleResponseItem(
-                    articleId = journal.articleId ?: 0,
-                    title = (journal.title) ?: "",
-                    dOI = journal.dOI ?: "",
-                    authors = journal.authors ?: "",
-                    year = journal.year ?: 0,
-                    abstract = journal.abstract ?: "",
-                    indexKeywords = journal.indexKeywords ?: ""
-                )
-
-                val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
-                @Suppress("DEPRECATION")
-                intentDetail.putExtra(
-                    DetailJournalActivity.EXTRA_DETAIL,
-                    dataJournal
-                )
-                holder.itemView.context.startActivity(intentDetail)
+            val jwtToken = userModel.jwt_token ?: ""
+            val user_id = userModel.user_id ?: ""
+            iconButton.visibility = View.VISIBLE
+            iconButton.setOnClickListener {
+                viewModel.unrateArticles(jwtToken, user_id, journal.articleId.toString())
+                notifyItemRemoved(holder.adapterPosition)
             }
+
+        }
+        holder.itemView.setOnClickListener {
+            val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)
+            @Suppress("DEPRECATION")
+            intentDetail.putExtra(
+                DetailJournalActivity.EXTRA_DETAIL,
+                listMyRatingArticle[holder.adapterPosition]
+            )
+            holder.itemView.context.startActivity(intentDetail)
         }
     }
 
-
+    fun updateArticles(newArticles: List<RecomArticleResponseItem>) {
+        listMyRatingArticle = newArticles
+        notifyDataSetChanged()
+    }
 }
