@@ -1,29 +1,44 @@
 package com.bangkidss.scholarseeks.ui.ratedArticle
 
+import android.content.Context
 import android.content.Intent
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkidss.scholarseeks.R
+import com.bangkidss.scholarseeks.UserModel
+import com.bangkidss.scholarseeks.UserPreference
 import com.bangkidss.scholarseeks.api.RecomArticleResponseItem
 import com.bangkidss.scholarseeks.databinding.JournalCardBinding
 import com.bangkidss.scholarseeks.ui.detailJournal.DetailJournalActivity
 import com.google.android.flexbox.FlexboxLayout
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListRatedArticleAdapter(
+    private val context: Context,
+    private val viewModel: RatedArticleViewModel,
     private var listMyRatingArticle: List<RecomArticleResponseItem>
 ) : RecyclerView.Adapter<ListRatedArticleAdapter.ListViewHolder>() {
+
+    private lateinit var mUserPreference: UserPreference
+    private lateinit var userModel: UserModel
 
     inner class ListViewHolder(val binding: JournalCardBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = JournalCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        mUserPreference = UserPreference(context)
+        userModel = mUserPreference.getUser()
         return ListViewHolder(binding)
     }
 
@@ -58,6 +73,14 @@ class ListRatedArticleAdapter(
                     keywordContainer.addView(textView)
                 }
             }
+            val jwtToken = userModel.jwt_token ?: ""
+            val user_id = userModel.user_id ?: ""
+            iconButton.visibility = View.VISIBLE
+            iconButton.setOnClickListener {
+                viewModel.unrateArticles(jwtToken, user_id, journal.articleId.toString())
+                notifyItemRemoved(holder.adapterPosition)
+            }
+
         }
         holder.itemView.setOnClickListener {
             val intentDetail = Intent(holder.itemView.context, DetailJournalActivity::class.java)

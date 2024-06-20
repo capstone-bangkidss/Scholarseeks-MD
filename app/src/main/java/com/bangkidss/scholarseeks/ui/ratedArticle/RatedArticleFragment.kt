@@ -34,7 +34,7 @@ class RatedArticleFragment : Fragment() {
         val jwtToken = userModel.jwt_token ?: ""
         val userId = userModel.user_id.toString()
 
-        val adapter = ListRatedArticleAdapter(emptyList())
+        val adapter = ListRatedArticleAdapter(requireContext(), viewModel, emptyList())
         binding.rvJournal.layoutManager = LinearLayoutManager(context)
         binding.rvJournal.adapter = adapter
 

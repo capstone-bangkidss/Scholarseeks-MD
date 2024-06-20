@@ -60,6 +60,7 @@
                 tools:text="19 June 2020" />
 
             <LinearLayout
+                android:id="@+id/bottom_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -72,14 +73,15 @@
                     app:flexWrap="wrap"
                     app:justifyContent="flex_start"/>
 
-<!--                <Button-->
-<!--                    android:id="@+id/iconButton"-->
-<!--                    style="?attr/materialIconButtonFilledTonalStyle"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="bottom"-->
-<!--                    app:icon="@drawable/icon_favorite_border"-->
-<!--                    tools:ignore="SpeakableTextPresentCheck" />-->
+                <Button
+                    android:id="@+id/iconButton"
+                    style="?attr/materialIconButtonFilledTonalStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:visibility="gone"
+                    app:icon="@drawable/delete"
+                    tools:ignore="SpeakableTextPresentCheck" />
             </LinearLayout>
 
 

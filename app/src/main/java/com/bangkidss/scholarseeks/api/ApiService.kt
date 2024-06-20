@@ -2,6 +2,7 @@ package com.bangkidss.scholarseeks.api
 
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -34,6 +35,14 @@ interface ApiService {
     fun rateArticle(
         @Header("Authorization") jwt_token: String,
         @Body ratingRequest: RatingRequest
+    ) : Call<RatingResponse>
+
+    @DELETE("articles/rating")
+    fun unrateArticle(
+        @Header("Authorization") jwt_token: String,
+        @Query("article_id") article_id: String,
+        @Query("user_id") user_id: String,
+//        @Body ratingRequest: RatingRequest
     ) : Call<RatingResponse>
 
 
